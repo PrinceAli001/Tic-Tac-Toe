@@ -6,6 +6,9 @@ function Players(name,marker) {
 }
 
 (function () {
+    let box = document.querySelectorAll('.box')
+    let gameOver = document.querySelector('dialog')
+
     let gameBoard = {
         firstRow:  [,,],
         secondRow: [,,],
@@ -15,28 +18,31 @@ function Players(name,marker) {
     let gameFlow = {
          player1 : Players('Joy','X'),
          player2 :  Players('Alice','O'),
-         game : function (row,position,marker) {
-           if (row == 'firstRow') {
-            gameBoard.firstRow.splice(position,1,marker)  
-           } else if (row == 'secondRow') {
-            gameBoard.secondRow.splice(position,1,marker)  
-           } else {
-            gameBoard.thirdRow.splice(position,1,marker)
-           }
+         roundCount : 1,
+         game : function () {
+            if (this.roundCount > 9) {
+                gameOver.showModal()
+            }
          }
     }
 
+    let display = {
+        clickBox : function () {
+            box.forEach(element => element.addEventListener('click', () => {
+                if (gameFlow.roundCount % 2 == 0) {
+                    element.textContent = `${gameFlow.player2.playerMarker}`
+                    element.setAttribute('style','color: #0000ff;')
+                } else {
+                    element.textContent = `${gameFlow.player1.playerMarker}`
+                    element.setAttribute('style','color: #ffa500;')
+                }
 
-    gameFlow.game('firstRow',0,'X')
-    gameFlow.game('secondRow',0,'X')
-    gameFlow.game('firstRow',1,'X')
-    gameFlow.game('thirdRow',0,'X')
-    gameFlow.game('firstRow',2,'O')
-    gameFlow.game('secondRow',2,'X')
-    gameFlow.game('secondRow',1,'O')
-    gameFlow.game('thirdRow',2,'O')
-    gameFlow.game('thirdRow',1,'O')
-    console.log(gameBoard)
-
-    return{gameBoard,gameFlow}
+                ++gameFlow.roundCount
+                gameFlow.game()
+            }))
+        }
+    }
+    
+    display.clickBox()
+    return{gameBoard,gameFlow,display}
 })()
