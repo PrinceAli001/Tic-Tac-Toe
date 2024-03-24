@@ -39,6 +39,13 @@ function Players(name,marker) {
 
                 ++gameFlow.roundCount
                 gameFlow.game()
+
+                if (element.textContent == 'X') {
+                    element.setAttribute('style','pointer-events: none; color: #ffa500;')
+                }
+                if (element.textContent == 'O') {
+                    element.setAttribute('style','pointer-events: none; color: #0000ff;')
+                }
             }))
         }
     }
