@@ -97,6 +97,9 @@ button{
     font-weight: 600;
     background-color: #ffffff;
 }
+button:focus{
+    outline-color: #ffa500;
+}
 button:active{
     border: 1px solid #ffffff;
     background-color: #0000ff;

@@ -164,7 +164,9 @@ function Players(name,marker) {
                     boxSix.textContent == 'X' &&
                     boxNine.textContent == 'X')) {
                     winLossDraw.textContent = `X wins!`
+                   setTimeout(() => {
                     gameOver.showModal()
+                   }, 1000);
                 } else if ((boxOne.textContent == 'O' && 
                             boxTwo.textContent == 'O' &&
                             boxThree.textContent == 'O')
@@ -197,9 +199,9 @@ function Players(name,marker) {
                             boxSix.textContent == 'O' &&
                             boxNine.textContent == 'O')) {
                     winLossDraw.textContent = `O wins!`
-                    gameOver.showModal()
-                } else {
-                    winLossDraw.textContent = `It's a tie`
+                    setTimeout(() => {
+                        gameOver.showModal()
+                    }, 1000);
                 }
             }
          }
@@ -208,7 +210,6 @@ function Players(name,marker) {
     let display = {
         clickBox : function () {
             box.forEach(element => element.addEventListener('click', () => {
-                gameFlow.game()
                 if (gameFlow.roundCount % 2 == 0) {
                     element.textContent = `${gameFlow.player2.playerMarker}`
                     element.setAttribute('style','color: #0000ff;')
@@ -217,6 +218,7 @@ function Players(name,marker) {
                     element.setAttribute('style','color: #ffa500;')
                 }
 
+                
                 ++gameFlow.roundCount
 
                 if (element.textContent == 'X') {
@@ -225,6 +227,8 @@ function Players(name,marker) {
                 if (element.textContent == 'O') {
                     element.setAttribute('style','pointer-events: none; color: #0000ff;')
                 }
+
+                gameFlow.game()
             }))
         }
     }
