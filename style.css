@@ -6,9 +6,13 @@
 }
 body{
     height: 100vh;
+    padding: 20px;
+}
+#tic-tac-toe{
     display: flex;
     align-items: center;
     justify-content: center;
+    height: 85%;
 }
 #tic-tac-box{
     display: grid;
@@ -78,14 +82,45 @@ body{
     border-top-color: #0000ff;
     border-left-color: #0000ff;
 }
-dialog{
+dialog,form{
     border-top-color: #ffa500;
     border-left-color: #ffa500;
     border-right-color: #0000ff;
     border-bottom-color: #0000ff;
+    border-radius: 10px;
     padding: 30px;
     margin: auto;
     text-align: center;
+}
+#players-form{
+    margin-top: 150px;
+}
+form{
+    padding: 0;
+}
+h1{
+    margin-bottom: 10px;
+}
+label{
+    display: block;
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #0000ff;
+}
+input{
+    border: 1px solid #c0c0c0;
+    height: 35px;
+    border-radius: 15px;
+    padding-left: 10px;
+    font-size: 1rem;
+    margin-bottom: 10px;
+}
+#submit{
+    margin-left: auto;
+    margin-right: auto;
+}
+input:focus{
+    outline-color: #ffa500;
 }
 button{
     display: block;
@@ -117,4 +152,22 @@ span{
 ::backdrop{
     background-color: #000000;
     opacity: .6;
+}#pause{
+    margin-left: auto;
+}
+#resume{
+    margin-left: auto;
+    margin-right: auto;
+    padding: 10px 75px;
+    margin-bottom: 15px;
+}
+#restart{
+    margin-left: auto;
+    margin-right: auto;
+    padding: 10px 75px;
+    margin-bottom: 15px;
+}
+#players-name{
+    margin-left: auto;
+    margin-right: auto;
 }

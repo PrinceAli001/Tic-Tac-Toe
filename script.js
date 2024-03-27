@@ -16,8 +16,17 @@ function Players(name,marker) {
     let boxSeven = document.querySelector('#box7')
     let boxEight = document.querySelector('#box8')
     let boxNine = document.querySelector('#box9')
-    let gameOver = document.querySelector('dialog')
+    let gameOver = document.querySelector('#game-over')
     let winLossDraw = document.querySelector('#win-loss-draw')
+    let pause = document.querySelector('#pause')
+    let menu = document.querySelector('#menu')
+    let restart = document.querySelectorAll('.restart-game')
+    let resume = document.querySelector('#resume')
+    let submit = document.querySelector('#submit')
+    let currentName = document.querySelector('#players-name')
+    let playerOne = document.querySelector('#player-one')
+    let playerTwo = document.querySelector('#player-two')
+    let playersForm = document.querySelector('#players-form')
 
     let gameBoard = {
         firstRow:  [,,],
@@ -26,8 +35,8 @@ function Players(name,marker) {
     }
     
     let gameFlow = {
-         player1 : Players('Joy','X'),
-         player2 :  Players('Alice','O'),
+         player1 : Players(`${playerOne}`,'X'),
+         player2 :  Players(`${playerTwo}`,'O'),
          roundCount : 1,
          game : function () {
             if (boxOne.textContent == 'X' && 
@@ -163,7 +172,7 @@ function Players(name,marker) {
                     (boxThree.textContent == 'X' &&
                     boxSix.textContent == 'X' &&
                     boxNine.textContent == 'X')) {
-                    winLossDraw.textContent = `X wins!`
+                    winLossDraw.textContent = `${gameFlow.player1.playerName} wins!`
                    setTimeout(() => {
                     gameOver.showModal()
                    }, 1000);
@@ -198,7 +207,7 @@ function Players(name,marker) {
                             (boxThree.textContent == 'O' &&
                             boxSix.textContent == 'O' &&
                             boxNine.textContent == 'O')) {
-                    winLossDraw.textContent = `O wins!`
+                    winLossDraw.textContent = `${gameFlow.player2.playerName} wins!`
                     setTimeout(() => {
                         gameOver.showModal()
                     }, 1000);
@@ -213,9 +222,11 @@ function Players(name,marker) {
                 if (gameFlow.roundCount % 2 == 0) {
                     element.textContent = `${gameFlow.player2.playerMarker}`
                     element.setAttribute('style','color: #0000ff;')
+                    currentName.textContent = `${gameFlow.player1.playerName}'s turn`
                 } else {
                     element.textContent = `${gameFlow.player1.playerMarker}`
                     element.setAttribute('style','color: #ffa500;')
+                    currentName.textContent = `${gameFlow.player2.playerName}'s turn`
                 }
 
                 
@@ -234,5 +245,32 @@ function Players(name,marker) {
     }
     
     display.clickBox()
+
+    pause.addEventListener('click', () => {
+        menu.showModal()
+    })
+
+    resume.addEventListener('click', () => {
+        menu.close()
+    })
+
+    restart.forEach(element => element.addEventListener('click', () => {
+        box.forEach(element => element.textContent = '')
+        gameFlow.roundCount = 1;
+        if (gameOver) {
+            gameOver.close()
+            box.forEach(element => element.setAttribute('style','background-color: none;'))
+        }
+            menu.close()
+    }))
+
+    submit.addEventListener('click', (event) => {
+        event.preventDefault()
+        if (gameFlow.roundCount == 1) {
+            currentName.textContent = `${gameFlow.player1.playerName}'s turn`
+        }
+        playersForm.close()
+    })
+
     return{gameBoard,gameFlow,display}
 })()
