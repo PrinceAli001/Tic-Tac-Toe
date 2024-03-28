@@ -9,7 +9,7 @@
 </head>
 <body>
     <button id="pause">|  |</button>
-    <p id="players-name"></p>
+    <p id="body-players-name"><span id="players-name"></span>'s turn</p>
     <dialog open id="players-form">
         <form action="#">
             <h1>Game name</h1>
@@ -17,20 +17,20 @@
             <input type="text" required id="player-one">
             <label for="player-two">Player 2</label>
             <input type="text" required id="player-two">
-            <button type="submit" id="submit">Submit</button>
+            <button type="submit" id="submit">Start game</button>
         </form>
     </dialog>
     <dialog id="menu">
         <button class="pause-menu" id="resume">Resume</button>
         <button class="pause-menu restart-game" id="restart">Restart</button>
-        <button class="pause-menu" id="char-menu">Character selection menu</button>
+        <button class="pause-menu char-menu">Player menu</button>
     </dialog>
     <div id="tic-tac-toe">
         <dialog id="game-over">
             <span id="win-loss-draw"></span>
             <div id="btn-div">
                 <button class="restart-game" type="button">Restart</button>
-                <button type="button">Character selection menu</button>
+                <button class="char-menu" type="button">Player menu</button>
             </div>
         </dialog>
         <div id="tic-tac-box">

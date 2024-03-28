@@ -27,6 +27,8 @@ function Players(name,marker) {
     let playerOne = document.querySelector('#player-one')
     let playerTwo = document.querySelector('#player-two')
     let playersForm = document.querySelector('#players-form')
+    let bodyName = document.querySelector('#body-players-name')
+    let charMenu = document.querySelectorAll('.char-menu')
 
     let gameBoard = {
         firstRow:  [,,],
@@ -35,8 +37,8 @@ function Players(name,marker) {
     }
     
     let gameFlow = {
-         player1 : Players(`${playerOne}`,'X'),
-         player2 :  Players(`${playerTwo}`,'O'),
+         player1 : Players(`Joy`,'X'),
+         player2 :  Players(`Alice`,'O'),
          roundCount : 1,
          game : function () {
             if (boxOne.textContent == 'X' && 
@@ -172,7 +174,7 @@ function Players(name,marker) {
                     (boxThree.textContent == 'X' &&
                     boxSix.textContent == 'X' &&
                     boxNine.textContent == 'X')) {
-                    winLossDraw.textContent = `${gameFlow.player1.playerName} wins!`
+                    winLossDraw.textContent = `${playerOne.value} wins!`
                    setTimeout(() => {
                     gameOver.showModal()
                    }, 1000);
@@ -207,7 +209,7 @@ function Players(name,marker) {
                             (boxThree.textContent == 'O' &&
                             boxSix.textContent == 'O' &&
                             boxNine.textContent == 'O')) {
-                    winLossDraw.textContent = `${gameFlow.player2.playerName} wins!`
+                    winLossDraw.textContent = `${playerTwo.value} wins!`
                     setTimeout(() => {
                         gameOver.showModal()
                     }, 1000);
@@ -222,11 +224,11 @@ function Players(name,marker) {
                 if (gameFlow.roundCount % 2 == 0) {
                     element.textContent = `${gameFlow.player2.playerMarker}`
                     element.setAttribute('style','color: #0000ff;')
-                    currentName.textContent = `${gameFlow.player1.playerName}'s turn`
+                    currentName.textContent = `${playerOne.value}`
                 } else {
                     element.textContent = `${gameFlow.player1.playerMarker}`
                     element.setAttribute('style','color: #ffa500;')
-                    currentName.textContent = `${gameFlow.player2.playerName}'s turn`
+                    currentName.textContent = `${playerTwo.value}`
                 }
 
                 
@@ -257,6 +259,7 @@ function Players(name,marker) {
     restart.forEach(element => element.addEventListener('click', () => {
         box.forEach(element => element.textContent = '')
         gameFlow.roundCount = 1;
+        currentName.textContent = `${playerOne.value}`
         if (gameOver) {
             gameOver.close()
             box.forEach(element => element.setAttribute('style','background-color: none;'))
@@ -267,10 +270,15 @@ function Players(name,marker) {
     submit.addEventListener('click', (event) => {
         event.preventDefault()
         if (gameFlow.roundCount == 1) {
-            currentName.textContent = `${gameFlow.player1.playerName}'s turn`
+            currentName.textContent = `${playerOne.value}`
         }
+        bodyName.setAttribute('style','display: block;')
         playersForm.close()
     })
+
+    charMenu.forEach(element => element.addEventListener('click', ()=> {
+        location.reload()
+    }))
 
     return{gameBoard,gameFlow,display}
 })()
