@@ -30,11 +30,6 @@ function Players(name,marker) {
     let bodyName = document.querySelector('#body-players-name')
     let charMenu = document.querySelectorAll('.char-menu')
 
-    let gameBoard = {
-        firstRow:  [,,],
-        secondRow: [,,],
-        thirdRow:  [,,]
-    }
     
     let gameFlow = {
          player1 : Players(`Joy`,'X'),
@@ -280,5 +275,5 @@ function Players(name,marker) {
         location.reload()
     }))
 
-    return{gameBoard,gameFlow,display}
+    return{gameFlow,display}
 })()
